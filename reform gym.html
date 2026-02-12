@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REFORM GYM | Premium Fitness Centre Nawada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gold: #FFD700; 
+            --accent-gold: #cfa300;
+            --deep-black: #050505;
+            --rich-black: #111111;
+            --card-bg: #161616;
+            --whatsapp-green: #25D366;
+            --text-grey: #b3b3b3;
+            --status-red: #ff4d4d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: var(--deep-black); 
+            color: #fff; 
+            line-height: 1.6; 
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- NAV & STATUS BAR --- */
+        header { position: fixed; width: 100%; top: 0; z-index: 1000; }
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; background: rgba(5, 5, 5, 0.98);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2); 
+            backdrop-filter: blur(10px);
+        }
+        .nav-logo img { height: 45px; width: auto; display: block; }
+        
+        .status-bar {
+            background: #000; color: #fff; font-size: 0.75rem;
+            padding: 5px 5%; display: flex; justify-content: center;
+            align-items: center; border-bottom: 1px solid #222;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .status-dot {
+            height: 8px; width: 8px; border-radius: 50%;
+            display: inline-block; margin-right: 8px;
+            box-shadow: 0 0 8px currentColor;
+        }
+        .pulse { animation: pulse-animation 2s infinite; }
+        @keyframes pulse-animation {
+            0% { transform: scale(0.95); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(0.95); opacity: 1; }
+        }
+
+        /* --- UPDATED HERO SECTION --- */
+        .hero {
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden;
+            /* Added high-quality gym background image */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax Effect */
+        }
+
+        .hero h1 { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1; margin-bottom: 10px; }
+        .hero h1 span { color: var(--primary-gold); }
+        .hero p { font-size: 1.1rem; letter-spacing: 3px; margin-bottom: 35px; color: #ccc; }
+        
+        .btn {
+            padding: 14px 30px; font-weight: 700; text-decoration: none; 
+            border-radius: 4px; text-transform: uppercase; transition: 0.3s;
+            display: inline-block; margin: 8px; border: 2px solid transparent; cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .btn-primary { background: var(--primary-gold); color: black; }
+        .btn-outline { background: transparent; color: var(--primary-gold); border: 2px solid var(--primary-gold); }
+        .btn-tour { background: white; color: black; border: 2px solid white; }
+
+        /* --- MODAL --- */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.98);
+            align-items: center; justify-content: center;
+        }
+        .modal-content {
+            position: relative; width: 90%; max-width: 380px;
+            aspect-ratio: 9/16; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+        .close-modal {
+            position: absolute; top: -45px; right: 0; color: white;
+            font-size: 24px; cursor: pointer; font-family: 'Oswald';
+        }
+        .modal-content iframe { width: 100%; height: 100%; border: none; }
+
+        /* --- SECTIONS --- */
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        section { padding: 100px 0; }
+        .section-title { text-align: center; color: var(--primary-gold); margin-bottom: 50px; font-size: 3rem; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .feature-card {
+            background: var(--card-bg); padding: 40px 20px; border-radius: 15px;
+            text-align: center; transition: 0.4s; border: 1px solid #222;
+        }
+        .feature-card:hover { transform: translateY(-10px); border-color: var(--primary-gold); }
+        .feature-card i { font-size: 2.5rem; color: var(--primary-gold); margin-bottom: 20px; }
+
+        /* --- TRIAL --- */
+        .trial-section { background: var(--primary-gold); color: black; text-align: center; }
+        .trial-form { margin-top: 35px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-width: 600px; margin-inline: auto; }
+        .trial-form input { padding: 16px; border: 1px solid #ddd; border-radius: 4px; }
+        .trial-form button { 
+            grid-column: span 2; padding: 16px; background: black; color: var(--primary-gold); 
+            border: none; font-weight: 800; cursor: pointer; text-transform: uppercase;
+        }
+
+        /* --- PRICING --- */
+        .pricing-wrapper { display: flex; flex-wrap: wrap; gap: 40px; }
+        .pricing-table { width: 100%; background: var(--card-bg); border-radius: 12px; border-collapse: collapse; overflow: hidden; }
+        .pricing-table td { padding: 20px; border-bottom: 1px solid #222; }
+        .price-tag { color: var(--primary-gold); font-weight: 700; text-align: right; }
+        .payment-card { background: #fff; color: #000; padding: 30px; border-radius: 15px; text-align: center; flex: 1; min-width: 280px; border: 3px solid var(--primary-gold); }
+        .upi-btn { background: #000; color: var(--primary-gold); padding: 15px; text-decoration: none; display: block; margin-top: 20px; font-weight: 800; border-radius: 5px; }
+
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp-green);
+            width: 60px; height: 60px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; z-index: 1001; color: white; font-size: 30px;
+        }
+        
+        footer { padding: 50px 5%; background: #000; text-align: center; border-top: 1px solid #222; }
+
+        @media (max-width: 768px) {
+            .trial-form { grid-template-columns: 1fr; }
+            .trial-form button { grid-column: span 1; }
+            .hero h1 { font-size: 3.2rem; }
+            .hero { background-attachment: scroll; } /* Improves performance on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="status-bar" id="status-bar">
+            <span id="status-dot" class="status-dot pulse"></span>
+            <span id="status-text">Checking Gym Status...</span>
+        </div>
+        <nav>
+            <a href="#" class="nav-logo">
+                <img src="https://cdn.fitimg.in/studio_logo_CC824E5F0B48D6.png" alt="Reform Gym Logo">
+            </a>
+            <div style="font-weight: 700; color: var(--primary-gold);"><i class="fas fa-phone-alt"></i> 8700783803</div>
+        </nav>
+    </header>
+
+    <a href="https://wa.me/918700783803" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <section class="hero">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>REFORM <span>GYM</span></h1>
+            <p>DIRECTED BY MR. PRADEEP GUPTA</p>
+            <div>
+                <button class="btn btn-tour" onclick="openModal()"><i class="fas fa-play"></i> Virtual Tour</button>
+                <a href="#trial" class="btn btn-primary">Free Pass</a>
+                <a href="#payment" class="btn btn-outline">Membership</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="tourModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">CLOSE &times;</span>
+            <iframe src="https://www.instagram.com/reel/DOOXn1Vj19Q/embed" allowtransparency="true" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <section id="trainers" class="container">
+        <h2 class="section-title" data-aos="fade-up">THE EXPERTS</h2>
+        <div class="grid-container">
+            <div class="feature-card" data-aos="zoom-in"><i class="fas fa-dumbbell"></i><h3>Satveer</h3><p>Personal Training</p></div>
+            <div class="feature-card" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-fist-raised"></i><h3>Jassi</h3><p>Strength Coach</p></div>
+            <div class="feature-card" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-heartbeat"></i><h3>Ravi</h3><p>Fitness Specialist</p></div>
+            <div class="feature-card" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-bolt"></i><h3>Ansh</h3><p>Fat Loss Expert</p></div>
+        </div>
+    </section>
+
+    <section id="trial" class="trial-section">
+        <div class="container" data-aos="fade-up">
+            <h2 style="font-size: 2.5rem;">GET A FREE 1-DAY PASS</h2>
+            <p>Experience the most premium gym in Nawada.</p>
+            <div class="trial-form">
+                <input type="text" id="trial-name" placeholder="Name">
+                <input type="tel" id="trial-phone" placeholder="Phone">
+                <button onclick="sendTrialWhatsApp()">Claim My Free Session</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="payment" class="container">
+        <h2 class="section-title">PRICING</h2>
+        <div class="pricing-wrapper">
+            <div style="flex: 2; min-width: 300px;">
+                <table class="pricing-table">
+                    <tr><td>Monthly Plan</td><td class="price-tag">₹ 1,500</td></tr>
+                    <tr><td>Quarterly (3 Months)</td><td class="price-tag">₹ 4,000</td></tr>
+                    <tr><td>Half Yearly (6 Months)</td><td class="price-tag">₹ 7,000</td></tr>
+                    <tr><td>Annual (1 Year)</td><td class="price-tag">₹ 10,000</td></tr>
+                </table>
+            </div>
+            <div class="payment-card" data-aos="flip-right">
+                <h3>SCAN TO JOIN</h3>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=reforms@icici&pn=Reform%20Gym&cu=INR" alt="QR" style="margin: 15px 0;">
+                <p>UPI: <strong>reforms@icici</strong></p>
+                <a href="upi://pay?pa=reforms@icici&pn=Reform%20Gym&cu=INR" class="upi-btn">PAY WITH MOBILE APP</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p style="color: var(--primary-gold); font-family: 'Oswald'; font-size: 1.8rem; letter-spacing: 2px;">REFORM GYM</p>
+        <p>706, 41, Om Vihar Phase 1, Nawada, New Delhi - 110059</p>
+        <p style="margin-top: 25px; opacity: 0.4; font-size: 0.8rem;">© 2026 REFORM GYM | ALL RIGHTS RESERVED</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        function updateGymStatus() {
+            const now = new Date();
+            const day = now.getDay(); 
+            const hour = now.getHours();
+            let isOpen = false;
+            
+            if (day >= 1 && day <= 6) { 
+                if ((hour >= 6 && hour < 12) || (hour >= 16 && hour < 22)) {
+                    isOpen = true;
+                }
+            } else if (day === 0) { 
+                if (hour >= 6 && hour < 12) {
+                    isOpen = true;
+                }
+            }
+
+            const dot = document.getElementById('status-dot');
+            const text = document.getElementById('status-text');
+
+            if (isOpen) {
+                dot.style.color = '#25D366';
+                dot.style.backgroundColor = '#25D366';
+                text.innerHTML = 'Gym is Open Now • Closes at ' + (hour < 12 ? '12:00 PM' : '10:00 PM');
+            } else {
+                dot.style.color = 'var(--status-red)';
+                dot.style.backgroundColor = 'var(--status-red)';
+                dot.classList.remove('pulse');
+                text.innerHTML = 'Gym is Closed Now • Opens at ' + (hour < 6 ? '6:00 AM' : 'Next Session');
+            }
+        }
+
+        setInterval(updateGymStatus, 60000); 
+        updateGymStatus(); 
+
+        function openModal() { document.getElementById("tourModal").style.display = "flex"; document.body.style.overflow = "hidden"; }
+        function closeModal() { document.getElementById("tourModal").style.display = "none"; document.body.style.overflow = "auto"; }
+        window.onclick = function(e) { if (e.target == document.getElementById("tourModal")) { closeModal(); } }
+
+        function sendTrialWhatsApp() {
+            const n = document.getElementById('trial-name').value;
+            const p = document.getElementById('trial-phone').value;
+            if(n && p) {
+                window.open(`https://wa.me/918700783803?text=Hi Reform Gym, I am ${n}. I want to book my Free Trial Session.`, '_blank');
+            } else { alert("Please enter name and phone"); }
+        }
+    </script>
+</body>
+</html>
